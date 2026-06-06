@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Mood Page</title>
+    <link rel="stylesheet" href="./style/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="./style/reset.css" rel="stylesheet" type="text/css">
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#012d36">
+
+
+
+</head>
+<body>
+
+<style>
+/* ── HERO VIDEO AREA ── */
+    #mood-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 70px;
+    }
+
+    #bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: opacity 0.9s ease;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(6,12,24,0.35) 0%,
+        rgba(6,12,24,0.10) 40%,
+        rgba(6,12,24,0.70) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* ── MOOD CARD ── */
+    .mood-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 22px;
+      padding: 36px 40px 32px;
+      width: 90%;
+      max-width: 620px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .mood-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .mood-card h2 {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      transition: opacity 0.4s;
+      color: white;
+    }
+
+    /* ── SOUND BUTTONS ── */
+    .sound-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .sound-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      font-family: "Roboto Condensed", sans-serif;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .sound-pill:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .sound-pill.active {
+      background: rgba(204,173,37,0.25);
+      border-color: #ccad25;
+      color: #ffdc5e;
+    }
+    .sound-pill svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── PLAYER CONTROLS ── */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .play-btn {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .play-btn:hover { background: rgba(255,255,255,0.22); }
+    .play-btn.playing {
+      background: rgba(204,173,37,0.3);
+      border-color: #ccad25;
+      color: #ffdc5e;
+    }
+    .play-btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+    .vol-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      flex: 1;
+      min-width: 160px;
+      max-width: 240px;
+    }
+    .vol-group svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+
+    input[type=range] {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      accent-color: #ccad25;
+      cursor: pointer;
+    }
+
+    .status-line {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+    .status-line strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+    /* ── DESTINATION TRACKER ── */
+    #destination-section {
+      position: relative;
+      z-index: 10;
+      background:#002f36f0;
+      padding: 50px 20px 60px;
+    }
+
+    .section-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ccad25;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title svg { width: 28px; height: 28px; fill: #ccad25; }
+
+    .section-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 28px;
+    }
+
+    .dest-picker {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    #dest-select {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background:#002f36;
+      border: 1px solid rgba(255,255,255,0.15);
+      color:white;
+      font-size: 18px;
+      font-family: "Roboto Condensed", sans-serif;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23aaa' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    #dest-select option {
+      background:white;
+      color: black;
+      font-size: 15px;
+    }
+
+    .dest-actions { display: flex; gap: 10px; }
+
+    .dest-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: "Roboto Condensed", sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid;
+      transition: all 0.2s;
+    }
+    .dest-btn svg { width: 17px; height: 17px; fill: currentColor; }
+
+    .btn-visited {
+      background:#002f36;
+      border-color: #2ea064;
+      color: #4cd68a;
+    }
+    .btn-visited:hover { background: rgba(46,160,100,0.28); }
+
+    .btn-planned {
+      background:#00242c;
+      border-color: #508cf0;
+      color: #7ab0ff;
+    }
+    .btn-planned:hover { background: rgba(80,140,240,0.28); }
+
+    /* ── LISTS ── */
+    .lists-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .list-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      padding: 18px 18px 14px;
+      min-height: 100px;
+    }
+
+    .list-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .list-card-header svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .list-card-title {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .list-card.visited-card .list-card-title,
+    .list-card.visited-card .list-card-header { color: #4cd68a; }
+    .list-card.planned-card .list-card-title,
+    .list-card.planned-card .list-card-header { color: #7ab0ff; }
+
+    .list-count {
+      margin-left: auto;
+      font-size: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 2px 9px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .dest-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: "Roboto Condensed", sans-serif;
+    }
+    .dest-tag:hover { opacity: 0.65; }
+    .dest-tag svg { width: 12px; height: 12px; fill: currentColor; }
+
+    .v-tag { 
+    background:#00242c;
+     color: #4cd68a; 
+     border: 1px solid rgba(46,160,100,0.3); 
+     }
+
+     
+    .p-tag { 
+    background:#00242c;
+     color: #7ab0ff;
+      border: 1px solid rgba(80,140,240,0.3);
+     }
+
+    .empty-hint {
+      font-size: 13px;
+      color: rgba(255,255,255,0.28);
+      font-style: italic;
+    }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background:white;
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 11px 22px;
+      border-radius: 40px;
+      font-size: 16px;
+      color:black;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+      white-space: nowrap;
+     font-weight: bold;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    
+    
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .navbar .menu_item { display: none; }
+      .hamburger { display: block; }
+      .mood-card { padding: 26px 20px 24px; }
+      .mood-card h2 { font-size: 28px; }
+      .lists-grid { grid-template-columns: 1fr; }
+      .dest-actions { flex-wrap: wrap; }
+      .dest-btn { flex: 1; justify-content: center; }
+    }
+
+
+
+
+</style>
+
+
+
+<header id="header">
+        <section id="logo">
+            <img id="logo_img" src="./images/bird_logo.png">
+         </section>
+        <section id="heading">
+            <h1>Travel Nest</h1>
+        </section>
+        
+        <nav class="navbar">
+            <a href="index.html" class="menu_item active">Home</a>
+            <a href="explorer.html" class="menu_item active">Explorer</a>
+            <a href="budgetPlanner.html" class="menu_item active">Travel Planner</a>
+            <a href="#" class="menu_item active">Mood</a>
+            <a href="recommender.html" class="menu_item active">Recommender</a>
+            <a href="feedback.html" class="menu_item active">Feedback</a>
+            <span class="menu_icon" onclick="openNav()">☰</span>
+
+
+        </nav>
+
+        
+        
+    </header>
+
+<div class="sidenav" id="sidenav">
+     <span class="close_btn" onclick="closeNav()">X</span>
+
+          <a href="index.html" class="menu_item active">Home</a>
+            <a href="explorer.html" class="menu_item active">Explorer</a>
+            <a href="budgetPlanner.html" class="menu_item active">Travel Planner</a>
+            <a href="#" class="menu_item active">Mood</a>
+            <a href="recommender.html" class="menu_item active">Recommender</a>
+            <a href="feedback.html" class="menu_item active">Feedback</a>
+    </div>
+
+
+
+
+  <section id="budget-heading">
+        <h2>Travel Mood</h2>
+    </section>
+
+
+    <script src="./style/Java/travelmood.js" defer></script>
+
+
+<!-- MOOD HERO -->
+  <section id="mood-hero">
+    <video id="bg-video" autoplay muted loop playsinline></video>
+    <div class="video-overlay"></div>
+
+    <div class="mood-card">
+      <span class="mood-eyebrow">Choose Your Mood</span>
+      <h2 id="mood-title">Forest</h2>
+
+      <!-- Sound selector pills -->
+      <div class="sound-pills">
+
+        <button class="sound-pill" data-mood="rain" onclick="selectMood(this)">
+          <!-- rain icon -->
+          <svg viewBox="0 0 24 24"><path d="M6 18v2m4-4v4M14 18v2m4-4v4M5.5 10a5.5 5.5 0 1 1 10.98-.5H17a4 4 0 1 1 0 8H7a5 5 0 0 1-1.5-9.5z"/></svg>
+          Rain
+        </button>
+
+        <button class="sound-pill" data-mood="beach" onclick="selectMood(this)">
+          <!-- waves icon -->
+          <svg viewBox="0 0 24 24"><path d="M2 14c1.4 0 2.8-.7 4-2 2.4 2.6 5.6 2.6 8 0 1.2 1.3 2.6 2 4 2m-16 4c1.4 0 2.8-.7 4-2 2.4 2.6 5.6 2.6 8 0 1.2 1.3 2.6 2 4 2M2 6l6-2 4 3 4-3 6 2"/></svg>
+          Beach
+        </button>
+
+        <button class="sound-pill active" data-mood="forest" onclick="selectMood(this)">
+          <!-- tree icon -->
+          <svg viewBox="0 0 24 24"><path d="M12 3L4 9h2l-3 4h4l-3 5h7v3h2v-3h7l-3-5h4l-3-4h2z"/></svg>
+          Forest
+        </button>
+
+        <button class="sound-pill" data-mood="city" onclick="selectMood(this)">
+          <!-- building icon -->
+          <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4v18M12 3l7 4v14M9 9h1m-1 3h1m-1 3h1m4-6h1m-1 3h1m-1 3h1"/></svg>
+          City
+        </button>
+
+        <button class="sound-pill" data-mood="night" onclick="selectMood(this)">
+          <!-- moon icon -->
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          Night
+        </button>
+
+      </div>
+
+      <!-- Play / Volume -->
+      <div class="player-controls">
+        <button class="play-btn" id="play-btn" onclick="togglePlay()" aria-label="Play/Pause">
+          <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="vol-group">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+          <input type="range" min="0" max="100" value="70" step="1" id="vol-slider" oninput="setVolume(this.value)" aria-label="Volume">
+          <span id="vol-val">70%</span>
+        </div>
+      </div>
+
+      <div class="status-line" id="status-line">
+        <strong id="status-mood">Forest</strong> &bull; <strong id="status-state">Playing</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINATION TRACKER -->
+  <section id="destination-section">
+    <div class="section-inner">
+
+      <h2 class="section-title">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        My Destinations
+      </h2>
+      <p class="section-subtitle">Track where you've been and where you're headed next.</p>
+
+      <div class="dest-picker">
+        <select id="dest-select" aria-label="Choose a destination">
+          <option value="">— Choose a destination —</option>
+          <optgroup label="Asia">
+            <option>UAE</option>
+            <option>Maldives</option>
+            <option>Malaysia</option>
+          </optgroup>
+          <optgroup label="Europe">
+            <option>France</option>
+            <option>Santorini</option>
+            <option>Switzerland</option>
+            <option>Italy</option>
+            <option>Germany</option>
+            <option></option>
+          </optgroup>
+          <optgroup label="North America">
+            <option>Canada</option>
+          </optgroup>
+          <optgroup label="Australia">
+            <option>Sydney, Australia</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="dest-actions">
+        <button class="dest-btn btn-visited" onclick="addDest('visited')">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+          Mark as Visited
+        </button>
+        <button class="dest-btn btn-planned" onclick="addDest('planned')">
+          <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+          Add to Plans
+        </button>
+      </div>
+
+      <!-- Lists -->
+      <div class="lists-grid">
+
+        <div class="list-card visited-card">
+          <div class="list-card-header">
+            <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+            <span class="list-card-title">Visited</span>
+            <span class="list-count" id="visited-count">0</span>
+          </div>
+          <div class="tags-wrap" id="visited-list">
+            <span class="empty-hint">No destinations yet</span>
+          </div>
+        </div>
+
+        <div class="list-card planned-card">
+          <div class="list-card-header">
+            <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+            <span class="list-card-title">Planned</span>
+            <span class="list-count" id="planned-count">0</span>
+          </div>
+          <div class="tags-wrap" id="planned-list">
+            <span class="empty-hint">No destinations yet</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+
+  <div id="toast"></div>
+
+<section id="footer1">
+        <div class="footer-back">
+            <h3>Subscribe to Newsletter</h3>
+            <p>Subscribe for more to get travel updates and offers</p>
+            <input 
+            type="email"
+            id="newsletterEmail"
+            placeholder="Enter your email"
+             >
+             <!-- MESSAGE BOX -->
+    <div id="messageBox"></div>
+            <button onclick="subscribeNewsletter()">
+            Subscribe
+        </button>
+
+        </div>
+
+        
+
+
+
+<div class="Contact-list">
+  <h3>Contact Us</h3>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
+
+    <p>+94 765 674 131</p>
+  </div>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h404q-4 20-4 40t4 40H160l320 200 146-91q14 13 30.5 22.5T691-572L480-440 160-640v400h640v-324q23-5 43-14t37-22v360q0 33-23.5 56.5T800-160H160Zm0-560v480-480Zm515 45q-35-35-35-85t35-85q35-35 85-35t85 35q35 35 35 85t-35 85q-35 35-85 35t-85-35Z"/></svg>
+
+    <p>atheekanihla@gmail.com</p>
+  </div>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+
+    <p>kingstreet, Matale.</p>
+  </div>
+
+</div>
+
+
+
+        <div class="Linkss">
+            <h3>Links</h3>
+            <p><a href="TravelMood.html#">Privacy Policy</a></p>
+            <p><a href="TravelMood.html#">Terms & Conditions</a></p>
+            <p><a href="TravelMood.html#">Customer Support</a></p>
+            <p><a href="TravelMood.html#">FAQ'S</a></p>
+        </div>
+
+        <div class="resources">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="TravelMood.html#">Travel Guides</a></li>
+                <li><a href="TravelMood.html#">Destinations</a></li>
+                <li><a href="TravelMood.html#">Travel Blog</a></li>
+                <li><a href="TravelMood.html#">Travel Tips</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+
+
+
+<footer> 
+        <p>&copy; 2026 Travel Nest by Atheeka Nihla. All rights reserved.</p> 
+    </footer> 
+
+
+
+
+    
+</body>
+</html>

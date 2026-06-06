@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget</title>
+    <link rel="stylesheet" href="./style/style.css" type="text/css">
+    <link href="./style/reset.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+   <link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#012d36">
+
+
+    
+</head>
+<body>
+
+
+
+<header id="header">
+        <section id="logo">
+            <img id="logo_img" src="./images/bird_logo.png">
+         </section>
+        <section id="heading">
+            <h1>Travel Nest</h1>
+        </section>
+        
+        <nav class="navbar">
+            <a href="index.html" class="menu_item active">Home</a>
+            <a href="explorer.html" class="menu_item active">Explorer</a>
+            <a href="#" class="menu_item active">Travel Planner</a>
+            <a href="TravelMood.html" class="menu_item active">Mood</a>
+            <a href="recommender.html" class="menu_item active">Recommender</a>
+            <a href="feedback.html" class="menu_item active">Feedback</a>
+           <span class="menu_icon" onclick="openNav()">☰</span>
+
+        </nav>
+
+        
+        
+    </header>
+
+<div class="sidenav" id="sidenav">
+     <span class="close_btn" onclick="closeNav()">X</span>
+
+          <a href="index.html" class="menu_item active">Home</a>
+            <a href="explorer.html" class="menu_item active">Explorer</a>
+            <a href="#" class="menu_item active">Travel Planner</a>
+            <a href="TravelMood.html" class="menu_item active">Mood</a>
+            <a href="recommender.html" class="menu_item active">Recommender</a>
+            <a href="feedback.html" class="menu_item active">Feedback</a>
+    </div>
+
+  <section id="budget-heading">
+        <h2>Travel Budget Planner</h2>
+    </section>
+
+
+<div class="budget-form">
+
+ <select id="destination">
+  <option value="">Select Destination</option>
+  <option value="uae">UAE</option>
+  <option value="france">France</option>
+  <option value="malaysia">Malaysia</option>
+  <option value="maldives">Maldives</option>
+  <option value="switzerland">Switzerland</option>
+  <option value="germany">Germany</option>
+  <option value="italy">Italy</option>
+  <option value="santorini">Santorini</option>
+  <option value="australia">Australia</option>
+  <option value="canada">Canada</option>
+</select>
+
+  <input type="number" id="days" placeholder="Number of days">
+  <input type="number" id="dailyBudget" placeholder="Daily budget ($)">
+
+ <button onclick="calculateBudget()">Calculate</button>
+
+<div id="tripResult"></div>
+ 
+
+
+</div>
+
+
+<style>
+
+/* RESULT CARD */
+
+#tripResult{
+
+    margin-top: 30px;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+/* CARD */
+
+.trip-card{
+
+    width: 350px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    color: white;
+
+    animation: fadeCard 0.5s ease;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.trip-card h3{
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+
+    color: #ccad25;
+}
+
+.trip-card p{
+
+    margin: 12px 0;
+
+    font-size: 18px;
+}
+
+/* STATUS COLORS */
+
+.low{
+    color: #22c55e;
+}
+
+.moderate{
+    color: #facc15;
+}
+
+.luxury{
+    color: #f03636;
+}
+
+/* ANIMATION */
+
+@keyframes fadeCard{
+
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.wishlist-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px 40px;
+}
+
+@media (max-width: 768px) {
+  .wishlist-container {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-items: center;
+  }
+
+  .saved-trip-card {
+    width: 90%;
+    max-width: 400px;
+    box-sizing: border-box;
+  }
+}
+.saved-trip-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+  overflow: hidden;
+  width: 100%;
+  font-family: "Roboto Condensed", sans-serif;
+  transition: transform 0.2s;
+}
+.saved-trip-card:hover {
+  transform: translateY(-4px);
+}
+
+.saved-trip-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.saved-trip-info {
+  padding: 14px 16px;
+}
+
+.saved-trip-info h3 {
+  font-size: 20px;
+  color: #002f36;
+  margin-bottom: 8px;
+}
+
+.saved-trip-info p {
+  font-size: 14px;
+  color: #444;
+  margin: 4px 0;
+}
+
+.remove-btn {
+  margin-top: 12px;
+  background: #fc5555;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Roboto Condensed", sans-serif;
+  width: 100%;
+  font-weight: bold;
+}
+
+.remove-btn:hover {
+  background: #c0392b;
+}
+
+
+
+
+</style>
+
+
+
+<!-- Result -->
+<div id="result" class="result-box">
+  <h3 id="totalCost"></h3>
+  <p id="budgetStatus"></p>
+
+  <div class="progress-bar">
+    <div id="progress"></div>
+  </div>
+</div>
+<div class="saved">
+<h2>Saved Trips</h2>
+</div>
+<div id="wishlist" class="wishlist-container">
+   
+
+</div>
+<br>
+
+
+
+
+
+<section id="footer1">
+        <div class="footer-back">
+            <h3>Subscribe to Newsletter</h3>
+            <p>Subscribe for more to get travel updates and offers</p>
+            <input 
+            type="email"
+            id="newsletterEmail"
+            placeholder="Enter your email"
+             >
+             <!-- MESSAGE BOX -->
+    <div id="messageBox"></div>
+            <button onclick="subscribeNewsletter()">
+            Subscribe
+        </button>
+
+        </div>
+
+        
+        
+
+
+
+<div class="Contact-list">
+  <h3>Contact Us</h3>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
+
+    <p>+94 765 674 131</p>
+  </div>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h404q-4 20-4 40t4 40H160l320 200 146-91q14 13 30.5 22.5T691-572L480-440 160-640v400h640v-324q23-5 43-14t37-22v360q0 33-23.5 56.5T800-160H160Zm0-560v480-480Zm515 45q-35-35-35-85t35-85q35-35 85-35t85 35q35 35 35 85t-35 85q-35 35-85 35t-85-35Z"/></svg>
+
+    <p>atheekanihla@gmail.com</p>
+  </div>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+
+    <p>kingstreet, Matale.</p>
+  </div>
+
+</div>
+
+
+
+         <div class="Linkss">
+            <h3>Links</h3>
+            <p><a href="budgetPlanner.html#">Privacy Policy</a></p>
+            <p><a href="budgetPlanner.html#">Terms & Conditions</a></p>
+            <p><a href="budgetPlanner.html#">Customer Support</a></p>
+            <p><a href="budgetPlanner.html#">FAQ'S</a></p>
+        </div>
+
+        <div class="resources">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="budgetPlanner.html#">Travel Guides</a></li>
+                <li><a href="budgetPlanner.html#">Destinations</a></li>
+                <li><a href="budgetPlanner.html#">Travel Blog</a></li>
+                <li><a href="budgetPlanner.html#">Travel Tips</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+
+
+<footer> 
+        <p>&copy; 2026 Travel Nest by Atheeka Nihla. All rights reserved.</p> 
+    </footer> 
+
+<script src="./style/Java/planner.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraveNest</title>
+   
+    <link rel="stylesheet" href="./style/style.css" type="text/css">
+    <link href="./style/reset.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu" />
+ 
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#012d36">
+
+
+ </head>
+<body>
+
+   
+
+
+    <header id="header">
+        <section id="logo">
+            <img id="logo_img" src="./images/bird_logo.png">
+         </section>
+        <section id="heading">
+            <h1>Travel Nest</h1>
+        </section>
+        
+        <nav class="navbar">
+            <a href="#" class="menu_item active">Home</a>
+            <a href="explorer.html" class="menu_item active">Explorer</a>
+            <a href="budgetPlanner.html" class="menu_item active">Travel Planner</a>
+            <a href="TravelMood.html" class="menu_item active">Mood</a>
+            <a href="recommender.html" class="menu_item active">Recommender</a>
+            <a href="feedback.html" class="menu_item active">Feedback</a>
+           <span class="menu_icon" onclick="openNav()">☰</span>
+        </nav>
+
+        
+        
+    </header>
+ <div class="sidenav" id="sidenav">
+     <span class="close_btn" onclick="closeNav()">X</span>
+
+          <a href="#" class="menu_item active">Home</a>
+            <a href="explorer.html" class="menu_item active">Explorer</a>
+            <a href="budgetPlanner.html" class="menu_item active">Travel Planner</a>
+            <a href="TravelMood.html" class="menu_item active">Mood</a>
+            <a href="recommender.html" class="menu_item active">Recommender</a>
+            <a href="feedback.html" class="menu_item active">Feedback</a>
+    </div>
+
+    <section id="homepage_img">
+        <img id="hI" src="./images/srilanka.webp">
+    </section>
+    <section id="travel_quote">
+    
+    <div class="quote active">
+      <h2>"A journey of a thousand miles begins with a single step."</h2>
+      <p>- Lao Tzu -</p>
+    </div>
+
+    <div class="quote">
+      <h2>“Once a year go somewhere you have never been before.”</h2>
+      <p>- Dalai Lama -</p>
+    </div>
+
+    <div class="quote">
+      <h2>“You lose sight of things…and when you travel, everything balances out.”</h2>
+      <p>- Daranna Gidel -</p>
+    </div>
+
+    <div class="quote">
+      <h2>“Travel makes one modest. You see what a tiny place you occupy in the world.” </h2>
+      <p>- Gustave Flaubert -</p>
+    </div>
+
+    <div class="quote">
+      <h2>“Life is either a daring adventure or nothing at all."</h2>
+      <p>- Helen Keller -</p>
+    </div>
+
+    <div class="quote">
+      <h2>“Live life with no excuses, travel with no regret.”</h2>
+      <p>- Oscar Wilde -</p>
+    </div>
+
+    <div class="quote">
+      <h2>“Travelling  it leaves you speechless, then turns you into a storyteller."</h2>
+      <p>- Ibn Battuta -</p>
+    </div>
+
+</section>
+    <section id="sub_headers">
+    <a href="#head" style="text-decoration: none;">
+        <button style="cursor: pointer;">EXPLORE</button>
+    </a>
+</section>
+    <div id="hero-row">
+
+      <div id="hero-left">
+        <section id="About_us">
+          <div class="Hero_text">
+              Discover <br>
+              Your Next <br>
+              Adventure <br>
+          </div>
+        </section>
+        <section id="hero-para">
+            <p>"From serene beaches to breathtaking mountains, Travel Nest brings you closer to the world's most beautiful destinations. With carefully curated tours and unforgettable experiences, we help you create memories that last a lifetime."</p>
+        </section>
+      </div>
+
+      <section id="slider_img">
+        <div class="slider">
+        <img src="./images/960x0.webp" class="slide">
+        <img src="./images/malslider_img.jpg" class="slide">
+        <img src="./images/swissslider_img.jpg" class="slide">
+        <img src="images/lake_img.jpg" class="slide">
+        <img src="./images/canada.jpg" class="slide">
+        <img src="./images/jordhan.webp" class="slide">
+        <img src="./images/mountains.jpg" class="slide">
+        <img src="./images/night.webp" class="slide" >
+        <img src="./images/Philiphinea.png" class="slide">
+        <img src="./images/uk.jpg" class="slide">
+
+
+
+        </div>
+    </section>
+
+    </div>
+
+<!-- DESTINATION OF THE DAY -->
+<section id="dotd-section">
+  <div id="dotd-label">
+    <div class="dotd-dot"></div>
+    <span>📍DESTINATION OF THE DAY</span>
+  </div>
+  <div id="dotd-card">
+    <div id="dotd-image-panel">
+      <span id="dotd-continent"></span>
+      <h2 id="dotd-name"></h2>
+    </div>
+    <div id="dotd-info">
+      <p id="dotd-description"></p>
+      <div id="dotd-meta-grid">
+        <div class="dotd-meta-card">
+          <p class="dotd-meta-label">TRAVEL TYPE</p>
+          <p class="dotd-meta-value" id="dotd-type-tag"></p>
+        </div>
+        <div class="dotd-meta-card">
+          <p class="dotd-meta-label">BUDGET</p>
+          <p class="dotd-meta-value gold" id="dotd-budget-tag"></p>
+        </div>
+        <div class="dotd-meta-card">
+          <p class="dotd-meta-label">BEST TIME</p>
+          <p class="dotd-meta-value" id="dotd-season-tag"></p>
+        </div>
+        <div class="dotd-meta-card">
+          <p class="dotd-meta-label">CONTINENT</p>
+          <p class="dotd-meta-value" id="dotd-continent-tag"></p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+    <section id="head">
+        <h2>Destinations</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="./images/canada.jpg">
+                <h3>Canada</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/switzerland.avif">
+                <h3>Switzerland</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/malaysia.png">
+                <h3>Malaysia</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/malslider_img.jpg">
+                <h3>Maldives</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/france.webp">
+                <h3>France</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/uae2.webp">
+                <h3>UAE</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/dupkeyphu41gaskx13ff.webp">
+                <h3>Australia</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/jordhan.webp">
+                <h3>Santorini</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/uk.jpg">
+                <h3>Germany</h3>
+            </div>
+
+            <div class="card">
+                <img src="./images/lake_img.jpg">
+                <h3>Italy</h3>
+            </div>
+
+
+
+            
+        </div>
+    </section>
+
+
+
+   
+    <section id="footer1">
+        <div class="footer-back">
+            <h3>Subscribe to Newsletter</h3>
+            <p>Subscribe for more to get travel updates and offers</p>
+            <input 
+            type="email"
+            id="newsletterEmail"
+            placeholder="Enter your email"
+             >
+
+    <!-- MESSAGE BOX -->
+    <div id="messageBox"></div>
+
+
+            <button onclick="subscribeNewsletter()">
+            Subscribe
+        </button>
+
+        </div>
+
+        
+
+
+
+<div class="Contact-list">
+  <h3>Contact Us</h3>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
+
+    <p>+94 765 674 131</p>
+  </div>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h404q-4 20-4 40t4 40H160l320 200 146-91q14 13 30.5 22.5T691-572L480-440 160-640v400h640v-324q23-5 43-14t37-22v360q0 33-23.5 56.5T800-160H160Zm0-560v480-480Zm515 45q-35-35-35-85t35-85q35-35 85-35t85 35q35 35 35 85t-35 85q-35 35-85 35t-85-35Z"/></svg>
+
+    <p>atheekanihla@gmail.com</p>
+  </div>
+
+  <div class="contact-item">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CCCCCC"><path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+
+    <p>kingstreet, Matale.</p>
+  </div>
+
+</div>
+
+
+
+   <div class="Linkss">
+            <h3>Links</h3>
+            <p><a href="index.html#">Privacy Policy</a></p>
+            <p><a href="index.html#">Terms & Conditions</a></p>
+            <p><a href="index.html#">Customer Support</a></p>
+            <p><a href="index.html#">FAQ'S</a></p>
+        </div>
+
+        <div class="resources">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="index.html#">Travel Guides</a></li>
+                <li><a href="index.html#">Destinations</a></li>
+                <li><a href="index.html#">Travel Blog</a></li>
+                <li><a href="index.html#">Travel Tips</a></li>
+            </ul>
+        </div>
+
+    </section>
+
+    <footer> 
+        <p>&copy; 2026 Travel Nest by Atheeka Nihla. All rights reserved.</p> 
+    </footer> 
+
+
+ <script src="./style/Java/script.js"></script>
+    
+</body>
+</html>
