@@ -20,7 +20,7 @@
 
 <header id="header">
         <section id="logo">
-            <img id="logo_img" src="./images/bird_logo.png">
+            <img id="logo_img" src="./images/bird_logo.png" alt="travelnestlogo">
          </section>
         <section id="heading">
             <h1>Travel Nest</h1>
@@ -73,8 +73,8 @@
   <option value="canada">Canada</option>
 </select>
 
-  <input type="number" id="days" placeholder="Number of days">
-  <input type="number" id="dailyBudget" placeholder="Daily budget ($)">
+  <input type="number" id="days" placeholder="Number of days" aria-label="noofdays">
+  <input type="number" id="dailyBudget" placeholder="Daily budget ($)" aria-label="dailybudget">
 
  <button onclick="calculateBudget()">Calculate</button>
 
@@ -281,6 +281,7 @@
             type="email"
             id="newsletterEmail"
             placeholder="Enter your email"
+            aria-label="enter email"
              >
              <!-- MESSAGE BOX -->
     <div id="messageBox"></div>
