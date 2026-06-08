@@ -269,7 +269,7 @@ color:#9f9d9d;
 #hero-row {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   padding: 30px 50px;
 }
 
