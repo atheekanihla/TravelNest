@@ -73,8 +73,11 @@
   <option value="canada">Canada</option>
 </select>
 
-  <input type="number" id="days" placeholder="Number of days" aria-label="noofdays">
-  <input type="number" id="dailyBudget" placeholder="Daily budget ($)" aria-label="dailybudget">
+ <input type="number" id="days" placeholder="Number of days" min="1" aria-label="noofdays">
+<p id="days-error" style="color:#e24b4a; font-size:12px; margin:4px 0 0;"></p>
+
+<input type="number" id="dailyBudget" placeholder="Daily budget ($)" min="0" aria-label="dailybudget">
+<p id="daily-error" style="color:#e24b4a; font-size:12px; margin:4px 0 0;"></p>
 
  <button onclick="calculateBudget()">Calculate</button>
 

@@ -25,18 +25,34 @@ function calculateBudget() {
   const days        = parseInt(document.getElementById("days").value);
   const daily       = parseInt(document.getElementById("dailyBudget").value);
 
- if (!destination) {
+ // clear previous errors
+  document.getElementById("days-error").textContent = "";
+  document.getElementById("daily-error").textContent = "";
+  document.getElementById("days").style.border = "";
+  document.getElementById("dailyBudget").style.border = "";
+
+  if (!destination) {
     document.getElementById("destination").focus();
     return;
   }
-  if (!days) {
-    document.getElementById("days").focus();
+
+  if (!days || days <= 0) {
+    document.getElementById("days").style.border = "1px solid #e24b4a";
+    document.getElementById("days-error").textContent = "Please enter a valid number of days (greater than 0)";
     return;
   }
-  if (!daily) {
-    document.getElementById("dailyBudget").focus();
+
+  if (!daily || daily < 0) {
+    document.getElementById("dailyBudget").style.border = "1px solid #e24b4a";
+    document.getElementById("daily-error").textContent = "Daily budget cannot be negative";
     return;
-  } 
+  }
+
+  if (daily === 0) {
+    document.getElementById("dailyBudget").style.border = "1px solid #e24b4a";
+    document.getElementById("daily-error").textContent = "Please enter a valid daily budget (greater than 0)";
+    return;
+  }
 
   const total = days * daily;
 
