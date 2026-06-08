@@ -17,7 +17,7 @@
 
 <header id="header">
         <section id="logo">
-            <img id="logo_img" src="./images/bird_logo.png">
+            <img id="logo_img" src="./images/bird_logo.png" alt="travelNestLogo">
          </section>
         <section id="heading">
             <h1>Travel Nest</h1>
@@ -90,9 +90,9 @@
 
     <h2>Share Your Experience</h2>
 
-    <input type="text" id="name" placeholder="Traveler Name" required>
+    <input type="text" id="name" placeholder="Traveler Name" required   aria-label="name">
 
-    <input type="text" id="email" placeholder="enter your email" required>
+    <input type="text" id="email" placeholder="enter your email" required arial-label="enter email">
 
     <select id="travelType">
       <option value="">Travel Type</option>
@@ -126,7 +126,7 @@
       <span data-value="5">★</span>
     </div>
 
-    <textarea id="comment" placeholder="Share your experience..."></textarea>
+    <textarea id="comment" placeholder="Share your experience..." arial-label="share experience"></textarea>
 
     <button type="submit">Submit </button>
 <div id="submitSuccessMsg" style="display:none; background:#d4edda; color:#155724; border:1px solid #c3e6cb; padding:16px 24px; border-radius:10px; margin-top:16px; font-size:17px; text-align:center;">
@@ -370,6 +370,7 @@
             type="email"
             id="newsletterEmail"
             placeholder="Enter your email"
+            arial-label="emter email"
              >
              <!-- MESSAGE BOX -->
     <div id="messageBox"></div>
