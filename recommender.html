@@ -22,7 +22,7 @@
 
 <header id="header">
         <section id="logo">
-            <img id="logo_img" src="./images/bird_logo.png">
+            <img id="logo_img" src="./images/bird_logo.png" alt="travelNestLogo">
          </section>
         <section id="heading">
             <h1>Travel Nest</h1>
@@ -94,7 +94,7 @@
     </div>
 </div>
 
-<!-- ── BUTTONS ── -->
+<!--  BUTTONS  -->
 <section id="recommend-buttons">
     <div class="btn-row">
         <button class="btn-primary" onclick="generateTrip()">✦ Generate Trip</button>
@@ -103,19 +103,19 @@
     </div>
 </section>
 
-<!-- ── DESTINATION CARD OUTPUT ── -->
+<!--  DESTINATION CARD OUTPUT -->
 <div id="destination-card-container"></div>
 <p id="no-result"></p>
 
 <hr class="section-divider">
 
-<!-- ── SAVED WISHLIST ── -->
+<!--  SAVED WISHLIST  -->
 <section id="wishlist-section">
     <h3>📌 Your Wishlist (saved to Mood → Planned)</h3>
     <div id="wishlist"></div>
 </section>
 
-<!-- ── TOAST ── -->
+<!--  TOAST  -->
 <div id="save-toast">✓ Saved to Wishlist &amp; Mood Planner!</div>
 
 <br>
@@ -132,6 +132,7 @@
             type="email"
             id="newsletterEmail"
             placeholder="Enter your email"
+            aria-label="enter email"
              >
              <!-- MESSAGE BOX -->
     <div id="messageBox"></div>
