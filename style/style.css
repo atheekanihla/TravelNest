@@ -1238,14 +1238,25 @@ footer p {
 
 .budget-form {
   margin: 20px;
-width:400px;
+
 }
 
-input {
+.budget-form select,
+.budget-form input {
   display: block;
+  width: 350px; /* desktop width */
+  max-width: 100%;
   margin: 10px 0;
   padding: 8px;
- 
+  box-sizing: border-box;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .budget-form select,
+  .budget-form input {
+    width: 100%;
+  }
 }
 
 .budget-form button {
