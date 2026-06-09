@@ -1,4 +1,4 @@
-const CACHE_NAME = "travelnest-v4";
+const CACHE_NAME = "travelnest-v5";
 
 const ASSETS = [
   "./index.html",
