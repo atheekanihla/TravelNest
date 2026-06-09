@@ -1036,16 +1036,13 @@ footer p {
 
 
 
-
-
-
-
 .cardss {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 20px;
 }
+
 
 
 
@@ -1053,8 +1050,10 @@ footer p {
   color: #002f36;
   border: 1px solid #ccc;
   padding: 15px;
-  width: 200px;
+  width: 100%;
   text-align: center;
+  max-width: 220px;
+  
 }
 
 
@@ -1790,7 +1789,7 @@ font-size: 20px;
     height: 200px;
   }
 
-  /* FIX: quote is absolute over image — reduce top so it fits */
+  
   #travel_quote {
     top: 80px;
     padding: 0 12px;
@@ -1800,7 +1799,7 @@ font-size: 20px;
     font-size: 14px;
   }
 
-  /* FIX: button absolute — move it closer */
+ 
   #sub_headers {
     top: 160px;
   }
@@ -1826,7 +1825,7 @@ font-size: 20px;
     max-width: 100%;
   }
 
-  /* FIX: slider — kill absolute positioning, show normally below hero text */
+  
   .slider {
     position: relative;
     width: 100%;
