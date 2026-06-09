@@ -128,7 +128,7 @@ function closeModal() {
 
 
 
-/*************************EXPLORE PAGE PLACEHOLDERS******************************/
+
 
  /*************************EXPLORE PAGE PLACEHOLDERS******************************/
 
@@ -148,12 +148,31 @@ document.addEventListener("DOMContentLoaded", function () {
     north_america: ["Canada"]
   };
 
+
+destinationFilter.innerHTML = '<option value="">Select Destination</option>';
+
+Object.values(countryData).flat().forEach(place => {
+  const option = document.createElement("option");
+  option.value = place.toLowerCase();
+  option.textContent = place;
+  destinationFilter.appendChild(option);
+});
+
+
   // Populate destination dropdown when continent changes
   continentFilter.addEventListener("change", function () {
     const selected = this.value;
     destinationFilter.innerHTML = '<option value="">Select Destination</option>';
 
-    if (selected !== "all" && countryData[selected]) {
+    if (selected === "all") {
+  Object.values(countryData).flat().forEach(place => {
+    const option = document.createElement("option");
+    option.value = place.toLowerCase();
+    option.textContent = place;
+    destinationFilter.appendChild(option);
+  });
+}
+else if (countryData[selected]) {
       countryData[selected].forEach(place => {
         const option = document.createElement("option");
         option.value = place.toLowerCase();

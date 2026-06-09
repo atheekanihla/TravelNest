@@ -1238,7 +1238,7 @@ footer p {
 
 .budget-form {
   margin: 20px;
-
+width:400px;
 }
 
 input {
@@ -1265,7 +1265,7 @@ input {
   height: 20px;
   background:#ccc;
   
-  border-radius: 10px;
+  
 }
 
 #progress {
@@ -1424,12 +1424,12 @@ input {
         }
 
         .destination-card-body h3 {
-            font-size: clamp(1.4rem, 6vw, 1.8rem);
+            font-size:1.4rem;
             font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin: 0 0 10px;
-            color: #fff;
+            color: black;
         }
 
         .destination-tags {

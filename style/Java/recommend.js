@@ -181,7 +181,7 @@ function surpriseAgain() {
 }
  
  
-// ── SAVE TO WISHLIST (also pushes to Mood → Planned tab) ──
+// ── SAVE TO WISHLIST (also pushes to Mood --> Planned tab) ──
 function saveTrip() {
   if (!currentTrip) {
     showToast("Generate a destination first!", true);
