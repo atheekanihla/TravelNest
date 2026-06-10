@@ -1676,7 +1676,7 @@ footer p {
 
 form {
   width: 100%;
-  max-width: 560px;
+  max-width: 1250px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1719,11 +1719,18 @@ input, select, textarea {
 }
 
 
-#feedbackForm button{
-padding: 20px;
-background-color:#002f36;
-color: white;
-font-size: 20px;
+#feedbackForm button {
+  display: block;        
+  margin: 20px auto;     
+  width: 200px;          
+  padding: 12px 20px;    
+  background-color: #002f36;
+  color: white;
+  font-size: 20px;      
+  border: none;          
+  border-radius: 6px;    
+  cursor: pointer;
+  font-weight: bold;
 }
 
 
@@ -1768,7 +1775,7 @@ font-size: 20px;
 
 .faq-section{
     width: 100%;
-    min-height: 100vh;
+    min-height: auto;
     background:#f3f4f6;
     padding: 80px 8%;
     font-family: "Roboto Condensed", sans-serif;
@@ -2493,23 +2500,45 @@ select {
 
 
 
-/* Add this to the very end of style.css */
 
-/* 1024px and below: 3 cards per row */
+
+
 @media (max-width: 1024px) {
   .card { flex: 0 0 calc(33.33% - 20px); max-width: 33.33%; }
 }
 
-/* 768px and below: 2 cards per row */
+
 @media (max-width: 768px) {
   .card { flex: 0 0 calc(50% - 20px); max-width: 50%; }
 }
 
-/* 580px and below: 1 card per row (Full width) */
+
 @media (max-width: 580px) {
   .card { 
       flex: 0 0 100%; 
       max-width: 100%; 
-      padding: 10px; /* Adjust padding for small screens */
+      padding: 10px; 
   }
+}
+
+
+
+
+/******tablet -navbar **/
+@media (max-width: 900px) {
+   
+    .navbar .menu_item {
+        font-size: 14px !important;
+        padding: 0 10px !important;
+    }
+
+    
+    #heading h1 {
+        font-size: 19px !important;
+    }
+
+    
+    #header {
+        padding: 0 10px !important;
+    }
 }
